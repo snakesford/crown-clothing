@@ -1,6 +1,6 @@
 import { initializeApp, } from 'firebase/app';
 import { getAuth, signInWithRedirect, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, Firestore} from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, Firestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCin7hX7o4k43wupPtj2EOmeNZM5oFCvSA",
@@ -10,7 +10,7 @@ const firebaseConfig = {
   messagingSenderId: "690845218920",
   appId: "1:690845218920:web:74d395a21d43dd69d2e3dd"
 };
-  
+
 const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
@@ -34,7 +34,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   console.log(userSnapshot);
   console.log(userSnapshot.exists());
 
-  if(!userSnapshot.exists()) {
+  if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 

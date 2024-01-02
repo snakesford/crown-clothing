@@ -10,7 +10,7 @@ const Navigation = () => {
     <Fragment>
       <div className='navigation'>
         <Link className='logo-container' to='/'>
-          <CrwnLogo className='logo'/>
+          <CrwnLogo className='logo' />
         </Link>
         <div className='nav-links-container'>
           <Link className='nav-link' to='/shop'>
@@ -21,9 +21,9 @@ const Navigation = () => {
           </Link>
         </div>
       </div>
-      <Outlet/>
+      <Outlet />
     </Fragment>
   )
 }
 
-  export default Navigation;
+export default Navigation;
