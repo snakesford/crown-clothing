@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 
 import { createAuthUserWithEmailAndPassword, createUserDocumentFromAuth } from '../../utils/firebase/firebase.utils';
 
@@ -71,4 +72,4 @@ const SignUpForm = () => {
   )
 }
 
-export default SignUpForm
+export default SignUpForm;
