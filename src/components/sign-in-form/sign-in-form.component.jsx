@@ -8,63 +8,64 @@ import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthUserWithEm
 import './sign-in-form.styles.scss';
 
 const defaultFormFields = {
-  email: '',
-  password: ''
+	email: '',
+	password: ''
 }
 
 const SignInForm = () => {
-  const [formFields, setFormFields] = useState(defaultFormFields)
-  const { email, password } = formFields;
+	const [formFields, setFormFields] = useState(defaultFormFields)
+	const { email, password } = formFields;
 
-  console.log(formFields);
+	console.log(formFields);
 
-  const resetFormFields = () => {
-    setFormFields(defaultFormFields)
-  }
+	const resetFormFields = () => {
+		setFormFields(defaultFormFields)
+	}
 
-  const signInWithGoogle = async () => {
-    const { user } = await signInWithGooglePopup();
+	const signInWithGoogle = async () => {
+		const { user } = await signInWithGooglePopup();
 		await createUserDocumentFromAuth(user)
-  }
+	}
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+	const handleSubmit = async (event) => {
+		event.preventDefault();
 
-   
-    try {
+
+		try {
 			const response = await signInAuthUserWithEmailAndPassword(email, password)
 			console.log(response);
-      resetFormFields()
-    } catch (error) {
+			resetFormFields()
+		} catch (error) {
+			alert("error signing you in")
+			console.log(error);
+		}
 
-    }
+	}
 
-  }
+	const handleChange = (event) => {
+		const { name, value } = event.target;
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+		setFormFields({ ...formFields, [name]: value });
+	}
 
-    setFormFields({ ...formFields, [name]: value });
-  }
+	return (
+		<div className="sign-up-form-container">
+			<h2>I already have an account</h2>
+			<span>Sign in with your email and password</span>
+			<form onSubmit={handleSubmit}>
 
-  return (
-    <div className="sign-up-form-container">
-      <h2>I already have an account</h2>
-      <span>Sign in with your email and password</span>
-      <form onSubmit={handleSubmit}>
+				<FormInput label="Email" type="email" required onChange={handleChange} name="email" value={email} />
 
-        <FormInput label="Email" type="email" required onChange={handleChange} name="email" value={email} />
-
-        <FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password} />
+				<FormInput label="Password" type="password" required onChange={handleChange} name="password" value={password} />
 
 				<div className="buttons-container">
 
-        	<Button type="submit">Sign In</Button>
-					<Button buttonType="google" type='submit' onClick={signInWithGoogle}>Google sign in</Button>
+					<Button type="submit">Sign In</Button>
+					<Button buttonType="google" type='button' onClick={signInWithGoogle}>Google sign in</Button>
 				</div>
-      </form>
-    </div>
-  )
+			</form>
+		</div>
+	)
 }
 
 export default SignInForm;
